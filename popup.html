@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --bg2: #e8e8e8;
+      --text: #222;
+      --text2: #777;
+      --accent: #222;
+      --border: #ddd;
+      --card: #fff;
+      --btn-active-bg: #222;
+      --btn-active-text: #fff;
+    }
+
+    body.lofi {
+      --bg: #2c1f14;
+      --bg2: #3d2b1a;
+      --text: #f0dfc0;
+      --text2: #b89a72;
+      --accent: #d4845a;
+      --border: #4a3525;
+      --card: #3a2518;
+      --btn-active-bg: #d4845a;
+      --btn-active-text: #2c1f14;
+    }
+
+    body.nightcore {
+      --bg: #0a0a1a;
+      --bg2: #12122a;
+      --text: #e0e0ff;
+      --text2: #8888cc;
+      --accent: #00eeff;
+      --border: #2a2a5a;
+      --card: #0f0f2a;
+      --btn-active-bg: #00eeff;
+      --btn-active-text: #0a0a1a;
+    }
+
+    body.vaporwave {
+      --bg: #1a0a2e;
+      --bg2: #2a0a3e;
+      --text: #ff71ce;
+      --text2: #b967ff;
+      --accent: #01cdfe;
+      --border: #3a1a5e;
+      --card: #200a3a;
+      --btn-active-bg: #01cdfe;
+      --btn-active-text: #1a0a2e;
+    }
+
+    body.minimal {
+      --bg: #ffffff;
+      --bg2: #f0f0f0;
+      --text: #111;
+      --text2: #999;
+      --accent: #111;
+      --border: #e0e0e0;
+      --card: #fafafa;
+      --btn-active-bg: #111;
+      --btn-active-text: #fff;
+    }
+
+    body.dark {
+      --bg: #111;
+      --bg2: #1a1a1a;
+      --text: #eee;
+      --text2: #888;
+      --accent: #eee;
+      --border: #2a2a2a;
+      --card: #1a1a1a;
+      --btn-active-bg: #eee;
+      --btn-active-text: #111;
+    }
+
+    body.abyss {
+      --bg: #060d1f;
+      --bg2: #0a1628;
+      --text: #a8c8e8;
+      --text2: #4a7a9a;
+      --accent: #2a9fd6;
+      --border: #0f2035;
+      --card: #091220;
+      --btn-active-bg: #2a9fd6;
+      --btn-active-text: #060d1f;
+    }
+
+    body.pastel {
+      --bg: #fdf0f8;
+      --bg2: #f5e6f0;
+      --text: #5a4060;
+      --text2: #a080a0;
+      --accent: #c490b0;
+      --border: #e8d0e0;
+      --card: #fff5fb;
+      --btn-active-bg: #c490b0;
+      --btn-active-text: #fff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      width: 360px;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+.main {
+  padding: 14px 14px 14px 28px;
+}
+
+    h2 {
+      font-size: 15px;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    /* theme sidebar */
+.theme-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: stretch;
+  z-index: 100;
+}
+
+.theme-tab {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  background: var(--bg2);
+  color: var(--text2);
+  font-size: 10px;
+  padding: 10px 4px;
+  cursor: pointer;
+  border-right: 1px solid var(--border);
+  letter-spacing: 1px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+    .theme-tab:hover { color: var(--text); }
+
+    .theme-panel {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 8px;
+      background: var(--bg2);
+      border-left: 1px solid var(--border);
+    }
+
+    .theme-panel.open { display: flex; }
+
+    .theme-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.1s;
+      flex-shrink: 0;
+    }
+
+    .theme-dot:hover { transform: scale(1.2); }
+    .theme-dot.active { border-color: var(--text); }
+    .theme-dot.t-lofi { background: #d4845a; }
+    .theme-dot.t-nightcore { background: #00eeff; }
+    .theme-dot.t-vaporwave { background: #ff71ce; }
+    .theme-dot.t-minimal { background: #ddd; }
+    .theme-dot.t-dark { background: #444; }
+    .theme-dot.t-abyss { background: #2a9fd6; }
+    .theme-dot.t-pastel { background: #c490b0; }
+
+    .overall {
+      background: var(--bg2);
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .overall-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      padding: 2px 0;
+      color: var(--text);
+    }
+
+    .overall-label { color: var(--text2); }
+
+    .sort-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .sort-bar button {
+      flex: 1;
+      padding: 5px;
+      font-size: 12px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg2);
+      color: var(--text);
+      transition: background 0.2s;
+    }
+
+    .sort-bar button.active {
+      background: var(--btn-active-bg);
+      color: var(--btn-active-text);
+      border-color: var(--btn-active-bg);
+    }
+
+    .song {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cover-wrap {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .cover {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .no-cover {
+      width: 48px;
+      height: 48px;
+      background: var(--bg2);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--text2);
+      border: 1px solid var(--border);
+    }
+
+    .cycle-btn {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      font-size: 14px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .song-info { flex: 1; overflow: hidden; }
+
+    .song-name-wrap {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .song-name {
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text);
+    }
+
+    .edit-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      color: var(--text2);
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .edit-btn:hover { color: var(--text); }
+
+    .song-meta {
+      font-size: 11px;
+      color: var(--text2);
+      margin-top: 2px;
+    }
+
+    .name-input {
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid var(--accent);
+      border-radius: 3px;
+      padding: 1px 4px;
+      width: 100%;
+      background: var(--card);
+      color: var(--text);
+    }
+
+    #clear {
+      margin-top: 12px;
+      font-size: 11px;
+      padding: 4px 10px;
+      cursor: pointer;
+      width: 100%;
+      background: var(--bg2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    #clear:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="theme-sidebar">
+    <div class="theme-panel" id="theme-panel">
+      <div class="theme-dot t-lofi" data-theme="lofi" title="Lofi"></div>
+      <div class="theme-dot t-nightcore" data-theme="nightcore" title="Nightcore"></div>
+      <div class="theme-dot t-vaporwave" data-theme="vaporwave" title="Vaporwave"></div>
+      <div class="theme-dot t-minimal" data-theme="minimal" title="Minimal"></div>
+      <div class="theme-dot t-dark" data-theme="dark" title="Dark"></div>
+      <div class="theme-dot t-abyss" data-theme="abyss" title="Abyss"></div>
+      <div class="theme-dot t-pastel" data-theme="pastel" title="Pastel"></div>
+    </div>
+    <div class="theme-tab" id="theme-tab">THEME</div>
+  </div>
+
+  <div class="main">
+    <h2>Slowed & Reverb Tracker</h2>
+
+    <div class="overall">
+      <div class="overall-row">
+        <span class="overall-label">Total time</span>
+        <span id="total-time">0s</span>
+      </div>
+      <div class="overall-row">
+        <span class="overall-label">Today</span>
+        <span id="today-time">0s</span>
+      </div>
+      <div class="overall-row">
+        <span class="overall-label">Avg pitch</span>
+        <span id="avg-pitch">N/A</span>
+      </div>
+      <div class="overall-row">
+        <span class="overall-label">Avg reverb</span>
+        <span id="avg-reverb">N/A</span>
+      </div>
+    </div>
+
+    <div class="sort-bar">
+      <button id="sort-recent" class="active">Recently listened</button>
+      <button id="sort-time">Most time spent</button>
+    </div>
+
+    <div id="songs"></div>
+    <button id="clear">Clear data</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

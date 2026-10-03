@@ -1,0 +1,30 @@
+{
+  "icons": {
+  "16": "icon.png",
+  "48": "icon.png",
+  "128": "icon.png"
+},
+"action": {
+  "default_popup": "popup.html",
+  "default_icon": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+},
+  "manifest_version": 3,
+  "name": "Slowed/Sped Up Music Tracker",
+  "version": "1.0",
+  "description": "Track your listening time, speed, and reverb settings on slowedandreverb.studio",
+  "permissions": ["storage", "alarms"],
+  "host_permissions": ["https://ws.audioscrobbler.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://slowedandreverb.studio/*"],
+      "js": ["content_scripts/slowedandreverb_studio.js"]
+    }
+  ]
+}
